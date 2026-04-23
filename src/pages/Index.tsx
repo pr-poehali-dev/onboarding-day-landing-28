@@ -59,13 +59,34 @@ const takeWith = [
   { icon: "Smile", label: "Хорошее настроение", sub: "Самое важное из списка" },
 ];
 
+const REGISTER_URL = "https://functions.poehali.dev/3f1dce9f-c781-463f-a43f-1ddebda31973";
+
 export default function Index() {
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(REGISTER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Что-то пошло не так. Попробуйте ещё раз.");
+      }
+    } catch {
+      setError("Нет соединения. Проверьте интернет и попробуйте снова.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -244,11 +265,15 @@ export default function Index() {
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-blue-400 focus:outline-none focus:border-brand-bright focus:ring-2 focus:ring-brand-bright/30 transition"
                 />
               </div>
+              {error && (
+                <p className="text-red-400 text-sm text-center">{error}</p>
+              )}
               <button
                 type="submit"
-                className="w-full bg-brand-bright hover:bg-blue-500 text-white font-bold text-base rounded-xl py-4 mt-2 transition-all duration-200 hover:shadow-lg hover:shadow-brand-bright/30 active:scale-[0.98]"
+                disabled={loading}
+                className="w-full bg-brand-bright hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-base rounded-xl py-4 mt-2 transition-all duration-200 hover:shadow-lg hover:shadow-brand-bright/30 active:scale-[0.98]"
               >
-                Подтвердить участие
+                {loading ? "Отправляем..." : "Подтвердить участие"}
               </button>
               <p className="text-center text-xs text-blue-400 pt-1">
                 Нажимая кнопку, вы соглашаетесь с обработкой персональных данных

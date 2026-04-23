@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS registrations (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
