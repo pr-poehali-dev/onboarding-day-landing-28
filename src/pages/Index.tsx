@@ -80,7 +80,14 @@ export default function Index() {
                               radial-gradient(circle at 80% 20%, #2C5282 0%, transparent 40%)`,
           }}
         />
-        <div className="relative max-w-5xl mx-auto px-6 py-20 md:py-32">
+        <div className="relative max-w-5xl mx-auto px-6 pt-8 pb-20 md:pb-32">
+          <div className="flex items-center gap-3 mb-14">
+            <img
+              src="https://cdn.poehali.dev/projects/da92b07f-7abb-4d55-9681-76a8c03d44f2/bucket/f7adea73-cec9-4787-9243-e2b312362527.png"
+              alt="Логотип"
+              className="w-10 h-10 object-contain brightness-0 invert"
+            />
+          </div>
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8">
             <span className="w-2 h-2 rounded-full bg-brand-bright animate-pulse" />
             <span className="text-sm font-medium tracking-wide text-blue-200">День открытых дверей</span>
@@ -253,7 +260,12 @@ export default function Index() {
 
       {/* FOOTER */}
       <footer className="bg-brand-deep border-t border-white/10 py-8">
-        <div className="max-w-5xl mx-auto px-6 text-center text-blue-400 text-sm">
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-center gap-3 text-blue-400 text-sm">
+          <img
+            src="https://cdn.poehali.dev/projects/da92b07f-7abb-4d55-9681-76a8c03d44f2/bucket/f7adea73-cec9-4787-9243-e2b312362527.png"
+            alt="Логотип"
+            className="w-6 h-6 object-contain opacity-40"
+          />
           © 2025 Компания. Все права защищены.
         </div>
       </footer>
